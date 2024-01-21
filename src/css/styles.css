@@ -1,0 +1,204 @@
+/* form */
+.form-search {
+    display: flex;
+    gap: 8px;
+    margin: 36px;
+    justify-content: center;
+}
+
+.text-input {
+    width: 272px;
+    height: 40px;
+    flex-shrink: 0;
+    border-radius: 4px;
+    border: 1px solid #808080;
+    outline: none;
+    padding-left: 16px;
+}
+
+.text-input::placeholder {
+    color: #808080;
+    font-family: Montserrat;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0.64px;
+}
+
+.text-input:hover {
+    border: 1px solid #000;
+}
+
+.text-input:focus {
+    border: 1px solid #4e75ff;
+}
+
+
+button {
+    padding: 8px 16px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 8px;
+    background: #4E75FF;
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 0.64px;
+    cursor: pointer;
+    border: none;
+
+}
+
+button:hover {
+    background: #6c8cff;
+}
+
+
+/* loader */
+.loader {
+    display: none;
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    position: relative;
+}
+
+.loader.visible {
+    display: block;
+    position: absolute;
+    right: 50%;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* gallery */
+
+.gallery {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    list-style: none;
+    flex-wrap: wrap;
+    gap: 24px;
+    margin: auto;
+}
+
+.gallery img {
+    display: block;
+    width: 360px;
+    height: 200px;
+}
+
+.image-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.image-info p {
+    margin: 5px 0;
+    text-align: center;
+}
+
+.image-info p.likes,
+.image-info p.views,
+.image-info p.comments,
+.image-info p.downloads {
+    font-weight: 700;
+}
+
+.image-info p.likes span,
+.image-info p.views span,
+.image-info p.comments span,
+.image-info p.downloads span {
+    content: '\A';
+    white-space: pre;
+    display: block;
+    margin-top: 5px;
+    font-weight: 500;
+}
+
+.gallery > li {
+    border-radius: 4px;
+    border: 1px solid #616161;
+}
+
+/* button load more */
+.button-loadmore-container {
+    margin-top: 32px;
+}
+
+.button-loadmore {
+    display: none;
+    padding: 8px 16px;
+    gap: 10px;
+    border-radius: 8px;
+    background: #4E75FF;
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 0.64px;
+    cursor: pointer;
+    border: none;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.button-loadmore.visible {
+    display: block;
+}
+
+.button-loadmore:hover {
+    background-color: #2980b9;
+}
+
+/* loader for loadmore*/
+
+.loader-loadmore {
+    display: none;
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    position: relative;
+}
+
+.loader-loadmore.visible {
+    display: block;
+    position: absolute;
+    right: 49%;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

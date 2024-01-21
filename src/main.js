@@ -38,6 +38,8 @@ const perPage = 40;
 let currentSearchQuery = '';
 let apiKey = '41728884-677575adccc9f2c5ba20b621f';
 let gallery = document.querySelector(".gallery");
+let modal = null;  // виправлення багу модалки
+
 
 document.querySelector(".form-search").addEventListener("submit", async function (event) {
     event.preventDefault();
@@ -78,12 +80,18 @@ document.querySelector(".form-search").addEventListener("submit", async function
                 backgroundColor: '#EF4040'
             });
         } else {
+            // виправлення багу модалки
+            if (modal) {
+                modal.destroy();
+            }   
+
             data.hits.forEach(result => {
                 const resultItem = createGalleryItem(result);
                 gallery.appendChild(resultItem);
             });
 
-            const modal = new SimpleLightbox('.gallery a', {
+            // виправлення багу модалки
+            modal = new SimpleLightbox('.gallery a', {
                 captionsData: 'alt',
                 captionDelay: 250,
             });
@@ -94,6 +102,10 @@ document.querySelector(".form-search").addEventListener("submit", async function
                 loadMoreBtn.classList.add('visible');
             }
         }
+        // виправлення неправильного пошуку
+        currentSearchQuery = searchImg; // Оновлюєтся глобальний стан
+        currentPage = 1; // Оновлюєтся глобальний стан для сторінки
+        
     } catch (error) {
         console.error("Error fetching search results:", error);
         loader.classList.remove('visible');
@@ -108,7 +120,9 @@ document.querySelector(".button-loadmore").addEventListener("click", async funct
     loadMoreBtn.classList.remove('visible');
 
     try {
+
         currentPage++;
+
         const paramsMore = {
             key: apiKey,
             q: currentSearchQuery,
@@ -127,17 +141,23 @@ document.querySelector(".button-loadmore").addEventListener("click", async funct
         loaderMore.classList.remove('visible');
 
         if (dataMore.hits.length > 0) {
+            // виправлення багу модалки
+            if (modal) {
+                modal.destroy();
+            }
+
             dataMore.hits.forEach(result => {
                 const resultItem = createGalleryItem(result);
                 gallery.appendChild(resultItem);
             });
 
-            const modalMore = new SimpleLightbox('.gallery a', {
+            // виправлення багу модалки
+            modal = new SimpleLightbox('.gallery a', {
                 captionsData: 'alt',
                 captionDelay: 250,
             });
 
-            modalMore.refresh();
+            modal.refresh();
 
             makeSmoothScrolling();
             

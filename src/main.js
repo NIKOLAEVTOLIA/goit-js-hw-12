@@ -59,7 +59,7 @@ document.querySelector(".form-search").addEventListener("submit", async function
         image_type: 'photo',
         orientation: 'horizontal',
         safesearch: true,
-        page: currentPage,
+        page: 1,
         per_page: perPage,
     };
 

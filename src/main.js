@@ -6,6 +6,33 @@ import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
 import axios from "axios";
 
+
+function createGalleryItem(result) {
+    const resultItem = document.createElement('li');
+    const imgElement = document.createElement('img');
+    const aElement = document.createElement('a');
+    const infoElement = document.createElement("div");
+
+    imgElement.src = result.webformatURL;
+    imgElement.alt = result.tags;
+
+    aElement.href = result.largeImageURL;
+    aElement.appendChild(imgElement);
+
+    infoElement.classList.add('image-info');
+    infoElement.innerHTML = `
+        <p class="likes">Likes <span>${result.likes}</span></p>
+        <p class="views">Views <span>${result.views}</span></p>
+        <p class="comments">Comments <span>${result.comments}</span></p>
+        <p class="downloads">Downloads <span>${result.downloads}</span></p>
+    `;
+
+    resultItem.appendChild(aElement);
+    resultItem.appendChild(infoElement);
+
+    return resultItem;
+}
+
 let currentPage = 1;
 const perPage = 40;
 let currentSearchQuery = '';
@@ -52,28 +79,7 @@ document.querySelector(".form-search").addEventListener("submit", async function
             });
         } else {
             data.hits.forEach(result => {
-                const resultItem = document.createElement('li');
-                const imgElement = document.createElement('img');
-                const aElement = document.createElement('a');
-                const infoElement = document.createElement("div");
-
-                imgElement.src = result.webformatURL;
-                imgElement.alt = result.tags;
-
-                aElement.href = result.largeImageURL;
-                aElement.appendChild(imgElement);
-
-                infoElement.classList.add('image-info');
-                infoElement.innerHTML = `
-                    <p class="likes">Likes <span>${result.likes}</span></p>
-                    <p class="views">Views <span>${result.views}</span></p>
-                    <p class="comments">Comments <span>${result.comments}</span></p>
-                    <p class="downloads">Downloads <span>${result.downloads}</span></p>
-                `;
-
-                resultItem.appendChild(aElement);
-                resultItem.appendChild(infoElement);
-
+                const resultItem = createGalleryItem(result);
                 gallery.appendChild(resultItem);
             });
 
@@ -122,27 +128,7 @@ document.querySelector(".button-loadmore").addEventListener("click", async funct
 
         if (dataMore.hits.length > 0) {
             dataMore.hits.forEach(result => {
-                const resultItem = document.createElement('li');
-                const imgElement = document.createElement('img');
-                const aElement = document.createElement('a');
-                const infoElement = document.createElement("div");
-
-                imgElement.src = result.webformatURL;
-                imgElement.alt = result.tags;
-
-                aElement.href = result.largeImageURL;
-                aElement.appendChild(imgElement);
-
-                infoElement.classList.add('image-info');
-                infoElement.innerHTML = `
-                    <p class="likes">Likes <span>${result.likes}</span></p>
-                    <p class="views">Views <span>${result.views}</span></p>
-                    <p class="comments">Comments <span>${result.comments}</span></p>
-                    <p class="downloads">Downloads <span>${result.downloads}</span></p>
-                `;
-
-                resultItem.appendChild(aElement);
-                resultItem.appendChild(infoElement);
+                const resultItem = createGalleryItem(result);
                 gallery.appendChild(resultItem);
             });
 
